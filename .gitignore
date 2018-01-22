@@ -1,8 +1,8 @@
-/Monument\ Valley/[Ll]ibrary/
-/Monument\ Valley/[Tt]emp/
-/Monument\ Valley/[Oo]bj/
-/Monument\ Valley/[Bb]uild/
-/Monument\ Valley/[Bb]uilds/
+/Monument\ Valley/[Ll]ibrary/*
+/Monument\ Valley/[Tt]emp/*
+/Monument\ Valley/[Oo]bj/*
+/Monument\ Valley/[Bb]uild/*
+/Monument\ Valley/[Bb]uilds/*
 /Monument\ Valley/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
