@@ -148,7 +148,6 @@ Transform:
   - {fileID: 1337340570}
   - {fileID: 1870345859}
   - {fileID: 2065406177}
-  - {fileID: 1582991411}
   - {fileID: 303142684}
   - {fileID: 802021795}
   - {fileID: 799018304}
@@ -437,7 +436,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 61371775}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &303142685
 MeshRenderer:
@@ -1025,7 +1024,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 61371775}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &799018305
 MeshRenderer:
@@ -1109,7 +1108,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 61371775}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &802021796
 MeshRenderer:
@@ -1362,7 +1361,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 61371775}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1098337343
 MeshRenderer:
@@ -2428,13 +2427,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1582991410}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: 0.99999994, w: -0.00043630067}
+  m_LocalPosition: {x: 9.89, y: -7.11, z: -3.5900002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1406039139}
-  m_Father: {fileID: 61371775}
-  m_RootOrder: 11
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
 --- !u!114 &1582991412
 MonoBehaviour:
@@ -2449,6 +2448,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minAngle: 90
   maxAngle: 180
+  midAngle: 120
+  _angleCorrection: 10
 --- !u!65 &1582991413
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3162,7 +3163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minY: -16
-  maxY: -8
+  maxY: -9
 --- !u!65 &2072309068
 BoxCollider:
   m_ObjectHideFlags: 0
