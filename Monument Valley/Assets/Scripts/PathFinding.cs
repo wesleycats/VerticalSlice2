@@ -1,254 +1,202 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PathFinding : MonoBehaviour {
 
-	Ray ray;
-	RaycastHit hit;
-	List<GameObject> path;
-	GameObject clickedNode;
-	GameObject startNode;
-	GameObject currentNode;
-	GameObject nextNode;
-	GameObject targetNode;
+	public List<Node> path;
+	public Node clickedNode;
+	public bool clear;
+	
+	Node startNode, currentNode, nextNode, targetNode;
 	int direction;
-	int nextDirection;
-
-	int test;
-	bool clear;
 
 	private void Awake()
 	{
-		path = new List<GameObject>();
+		path = new List<Node>();
 	}
 
-	// Use this for initialization
-	void Start()
+	public List<Node> FindPath(Node node)
 	{
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			test = 0;
-			clear = true;
-		}
-		else
-		{
-			ray.origin = new Vector3(0, 0, 0);
-		}
-
-		if (Physics.Raycast(ray, out hit, 100))
-		{
-			//Debug.DrawLine(ray.origin, hit.point, Color.green);
-			if (hit.transform.tag == "WalkNode")
-			{
-				path.Clear();
-				FindPath(hit.transform.gameObject.GetComponent<Node>());
-			}
-		}
-	}
-
-	List<GameObject> FindPath(Node node)
-	{
-		Debug.LogWarning("Clicked node: " + node.gameObject.name);
 		if (node.walkable)
 		{
 			direction = 0;
-			Debug.Log("direction: " + direction);
-			startNode = node.gameObject;
-			clickedNode = startNode;
+			clickedNode = node;
+			startNode = clickedNode;
 			currentNode = startNode;
-			path.Add(currentNode);
-			Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
+			AddNodeToPath(currentNode);
+
 			try
 			{
 				do
 				{
-					nextNode = currentNode.GetComponent<Node>().neighbours[direction];
+					ChangeNextToNeighbour(currentNode);
 
-					if (currentNode.GetComponent<Node>().neighbours.Length > startNode.GetComponent<Node>().neighbours.Length)
-					{
-						startNode = currentNode;
-						Debug.Log("start node changed to " + currentNode.name);
-					}
+					if (currentNode.neighbours.Length > startNode.neighbours.Length) startNode = currentNode;
 
-					if (nextNode.GetComponent<Node>().walkable)
+					if (nextNode.walkable)
 					{
 						currentNode = nextNode;
-						Debug.Log("next node:" + nextNode.name);
-						path.Add(currentNode);
-						Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
-						if (currentNode == targetNode)
-						{
-							Debug.Log("Correct path");
-							return path;
-						}
+						AddNodeToPath(currentNode);
+						
+						if (currentNode == targetNode) break;
 					}
 					else
 					{
 						direction = 2;
-						Debug.Log("direction: " + direction);
-						nextNode = currentNode.GetComponent<Node>().neighbours[direction];
-						if (nextNode.GetComponent<Node>().walkable)
+						ChangeNextToNeighbour(currentNode);
+
+						if (nextNode.walkable)
 						{
 							currentNode = nextNode;
-							path.Add(currentNode);
-							Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
+							AddNodeToPath(currentNode);
+							
 							if (currentNode == targetNode)
 							{
-								Debug.Log("Correct path");
-								return path;
+								break;
 							}
 							else
 							{
 								clear = false;
-								if (currentNode.GetComponent<Node>().neighbours[direction])
-								{
-									// To break out this loop and continue in the catch loop 
-								}
+								if (currentNode.neighbours[direction]); // To break out this loop and continue in the catch loop
 							}
 						}
 						else
 						{
-							Debug.Log("Uncorrect path");
+							Debug.LogWarning("Uncorrect path");
+							path.Clear();
 							return path;
 						}
 					}
-				} while (clear && currentNode.GetComponent<Node>().walkable && currentNode.GetComponent<Node>().neighbours[1]);
+				} while (clear && currentNode.walkable && currentNode.neighbours[1]);
 			}
 			catch
 			{
 				direction = 1;
-				Debug.Log("direction: " + direction);
 				if (clear)
 				{
 					path.Clear();
-					Debug.Log("Cleared path");
 					currentNode = clickedNode;
-					path.Add(currentNode);
-					Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
+					AddNodeToPath(currentNode);
 					currentNode = startNode;
-					path.Add(currentNode);
-					Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
-					nextNode = startNode.GetComponent<Node>().neighbours[direction];
-					if (nextNode.GetComponent<Node>().walkable)
+					AddNodeToPath(currentNode);
+					ChangeNextToNeighbour(currentNode);
+
+					if (nextNode.walkable)
 					{
 						currentNode = nextNode;
-						Debug.Log("next node:" + nextNode.name);
-						path.Add(currentNode);
-						Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
+						AddNodeToPath(currentNode);
+						
 						clear = false;
 						try
 						{
-							if (currentNode.GetComponent<Node>().neighbours[direction])
-							{
-								// To break out this loop and continue in the catch loop 
-							}
+							if (currentNode.neighbours[direction]); // To break out this loop and continue in the catch loop
 						}
 						catch
 						{
-							Debug.Log("Uncorrect path");
+							Debug.LogWarning("Uncorrect path");
+							path.Clear();
 							return path;
 						}
 					}
 					else
 					{
-						Debug.Log("Uncorrect path");
+						Debug.LogWarning("Uncorrect path");
+						path.Clear();
 						return path;
 					}
 				}
 				else
 				{
-					Debug.Log("Uncorrect path");
+					Debug.LogWarning("Uncorrect path");
+					path.Clear();
 					return path;
 				}
 				try
 				{
 					do
 					{
-						test++;
-						nextNode = currentNode.GetComponent<Node>().neighbours[direction];
-						if (currentNode.GetComponent<Node>().neighbours.Length > startNode.GetComponent<Node>().neighbours.Length)
-						{
-							startNode = currentNode;
-							Debug.Log("start node changed to " + currentNode.name);
-						}
-						if (nextNode.GetComponent<Node>().walkable)
+						ChangeNextToNeighbour(currentNode);
+
+						if (currentNode.neighbours.Length > startNode.neighbours.Length) startNode = currentNode;
+
+						if (nextNode.walkable)
 						{
 							currentNode = nextNode;
-							Debug.Log("next node:" + nextNode.name);
-							path.Add(currentNode);
-							Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
-							if (currentNode == targetNode)
-							{
-								Debug.Log("Correct path");
-								return path;
-							}
+							AddNodeToPath(currentNode);
+							
+							if (currentNode == targetNode) break;
 						}
 						else
 						{
-							// TEST
 							direction = 2;
-							Debug.Log("direction: " + direction);
-							nextNode = currentNode.GetComponent<Node>().neighbours[direction];
-							if (nextNode.GetComponent<Node>().walkable)
+							ChangeNextToNeighbour(currentNode);
+
+							if (nextNode.walkable)
 							{
 								currentNode = nextNode;
-								path.Add(currentNode);
-								Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
+								AddNodeToPath(currentNode);
+
 								if (currentNode == targetNode)
 								{
-									Debug.Log("Correct path");
-									return path;
+									break;
 								}
 								else
 								{
 									direction = 1;
-									Debug.Log("direction: " + direction);
-									nextNode = currentNode.GetComponent<Node>().neighbours[direction];
-									if (nextNode.GetComponent<Node>().walkable)
+									ChangeNextToNeighbour(currentNode);
+
+									if (nextNode.walkable)
 									{
 										currentNode = nextNode;
-										path.Add(currentNode);
-										Debug.Log("added " + currentNode.name + " in index " + path.IndexOf(currentNode));
-										if (currentNode == targetNode)
-										{
-											Debug.Log("Correct path");
-											return path;
-										}
+										AddNodeToPath(currentNode);
+
+										if (currentNode == targetNode) break;
 									}
 								}
 							}
 							else
 							{
-								Debug.Log("Uncorrect path");
+								Debug.LogWarning("Uncorrect path");
+								path.Clear();
 								return path;
 							}
 						}
-					} while (test < 20);
+					} while (currentNode != targetNode);
 				}
 				catch
 				{
-					Debug.Log("Uncorrect path");
+					Debug.LogWarning("Uncorrect path");
+					path.Clear();
 					return path;
 				}
 			}
-
-			Debug.Log("what");
-			//PrintList(path);
 		}
 
+		path.Reverse();
+		PrintList(path);
 		return path;
 	}
 
-	void PrintList(List<GameObject> list)
+	private void AddNodeToPath(Node node)
 	{
-		for(int i = 0; i < list.Count; i++)
+		path.Add(node);
+	}
+
+	private void ChangeCurrentTo(Node node)
+	{
+		currentNode = node;
+	}
+
+	private void ChangeNextToNeighbour(Node node)
+	{
+		nextNode = node.GetComponent<Node>().neighbours[direction].GetComponent<Node>();
+	}
+
+	void PrintList(List<Node> list)
+	{
+		for (int i = 0; i < list.Count; i++)
 		{
 			Debug.Log(list[i].name);
 		}
@@ -256,7 +204,7 @@ public class PathFinding : MonoBehaviour {
 
 	private void OnTriggerEnter(Collider other)
 	{
-		targetNode = other.gameObject;
+		targetNode = other.GetComponent<Node>();
 		Debug.Log("Target node changed to: " + targetNode.name);
 	}
 }

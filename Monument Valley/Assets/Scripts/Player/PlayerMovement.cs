@@ -3,36 +3,56 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour {
-	
-	Ray ray;
-	RaycastHit hit;
-	List<GameObject> path;
+
+	[SerializeField] float moveSpeed;
+
+	public List<Node> path;
+	public bool move;
+
+	float step;
+	int pathIndex = 0;
+	private void Awake()
+	{
+		path = new List<Node>();
+	}
 
 	// Use this for initialization
 	void Start()
 	{
+		step = moveSpeed * Time.deltaTime;
+		move = false;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		/*
-		if (Input.GetMouseButtonDown(0))
+		if (transform.position == path[path.Count - 1].transform.position)
 		{
-			ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		}
-		else
-		{
-			ray.origin = new Vector3(0, 0, 0);
+			move = false;
 		}
 
-		if (Physics.Raycast(ray, out hit, 100))
+		step = moveSpeed * Time.deltaTime;
+		path = GetComponent<PathFinding>().path;
+		try
 		{
-			//Debug.DrawLine(ray.origin, hit.point, Color.green);
-			if (hit.transform.tag == "WalkNode")
+			if (move)
 			{
-				//Debug.Log(FindPath(hit.transform.gameObject.GetComponent<Node>()));
+				Node currentNode = path[pathIndex];
+				transform.LookAt(currentNode.transform.position);
+				transform.Translate(transform.forward * step);
+
+				if (Vector3.Distance(transform.position, currentNode.transform.position) <= 0.05)
+				{
+					transform.position = currentNode.transform.position;
+					currentNode = path[pathIndex++];
+					// is dit de einde node?
+				}
+
 			}
-		}*/
+		}
+		catch
+		{
+			//move = false;
+		}
 	}
 }
