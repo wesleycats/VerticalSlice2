@@ -1,0 +1,196 @@
+fileFormatVersion: 2
+guid: 35cf3b186de74554eb738362178bceac
+timeCreated: 1517316129
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: benen_1
+    100002: body
+    100004: ch
+    100006: //RootNode
+    100008: Cone
+    100010: Disc
+    100012: hoofd
+    100014: hoofd_2
+    100016: Joint
+    100018: Joint_1
+    100020: Joint_1_2
+    100022: Joint_1_3
+    100024: Joint_2
+    100026: Joint_2_2
+    100028: Joint_2_3
+    100030: Joint_3
+    100032: Joint_3_2
+    100034: R_hoodie
+    100036: R_jurk
+    100038: R_outfit
+    100040: Root
+    100042: Sphere
+    100044: Z_hoed
+    100046: Z_jurk
+    100048: Z_outfit
+    400000: benen_1
+    400002: body
+    400004: ch
+    400006: //RootNode
+    400008: Cone
+    400010: Disc
+    400012: hoofd
+    400014: hoofd_2
+    400016: Joint
+    400018: Joint_1
+    400020: Joint_1_2
+    400022: Joint_1_3
+    400024: Joint_2
+    400026: Joint_2_2
+    400028: Joint_2_3
+    400030: Joint_3
+    400032: Joint_3_2
+    400034: R_hoodie
+    400036: R_jurk
+    400038: R_outfit
+    400040: Root
+    400042: Sphere
+    400044: Z_hoed
+    400046: Z_jurk
+    400048: Z_outfit
+    2300000: body
+    2300002: Cone
+    2300004: Disc
+    2300006: hoofd
+    2300008: hoofd_2
+    2300010: R_hoodie
+    2300012: R_jurk
+    2300014: Sphere
+    2300016: Z_jurk
+    3300000: body
+    3300002: Cone
+    3300004: Disc
+    3300006: hoofd
+    3300008: hoofd_2
+    3300010: R_hoodie
+    3300012: R_jurk
+    3300014: Sphere
+    3300016: Z_jurk
+    4300000: Cone
+    4300002: hoofd
+    4300004: R_jurk
+    4300006: R_hoodie
+    4300008: Z_jurk
+    4300010: Sphere
+    4300012: Disc
+    4300014: benen_1
+    4300016: hoofd_2
+    4300018: body
+    7400000: CINEMA_4D_Main
+    9500000: //RootNode
+    13700000: benen_1
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.2
+    second: {fileID: 2100000, guid: 23e3b8808be7e244f857e14781cd739f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.3
+    second: {fileID: 2100000, guid: 826549727a7d1aa44af3e999806f6252, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.4
+    second: {fileID: 2100000, guid: 8bf57264ba27ba2488f6cd21e1ff14bb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.5
+    second: {fileID: 2100000, guid: 405a86c9818753a488ef8683d8830438, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.6
+    second: {fileID: 2100000, guid: 34815355139879c46a4afc4ef8e7fa48, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: ac5c4c640c873b349a524fdbea95452e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
