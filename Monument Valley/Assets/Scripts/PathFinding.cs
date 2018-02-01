@@ -8,8 +8,9 @@ public class PathFinding : MonoBehaviour {
 	public List<Node> path;
 	public Node clickedNode;
 	public bool clear;
+	public bool correct;
 	
-	Node startNode, currentNode, nextNode, targetNode;
+	public Node startNode, currentNode, nextNode, targetNode;
 	int direction;
 
 	private void Awake()
@@ -40,7 +41,12 @@ public class PathFinding : MonoBehaviour {
 						currentNode = nextNode;
 						AddNodeToPath(currentNode);
 						
-						if (currentNode == targetNode) break;
+						if (currentNode == targetNode)
+						{
+							correct = true;
+							break;		
+
+						}					
 					}
 					else
 					{
@@ -54,6 +60,7 @@ public class PathFinding : MonoBehaviour {
 							
 							if (currentNode == targetNode)
 							{
+								correct = true;
 								break;
 							}
 							else
@@ -65,7 +72,8 @@ public class PathFinding : MonoBehaviour {
 						else
 						{
 							Debug.LogWarning("Uncorrect path");
-							path.Clear();
+							correct = false;
+							ClearList(path);
 							return path;
 						}
 					}
@@ -76,7 +84,7 @@ public class PathFinding : MonoBehaviour {
 				direction = 1;
 				if (clear)
 				{
-					path.Clear();
+					ClearList(path);
 					currentNode = clickedNode;
 					AddNodeToPath(currentNode);
 					currentNode = startNode;
@@ -96,21 +104,24 @@ public class PathFinding : MonoBehaviour {
 						catch
 						{
 							Debug.LogWarning("Uncorrect path");
-							path.Clear();
+							correct = false;
+							ClearList(path);
 							return path;
 						}
 					}
 					else
 					{
 						Debug.LogWarning("Uncorrect path");
-						path.Clear();
+						correct = false;
+						ClearList(path);
 						return path;
 					}
 				}
 				else
 				{
 					Debug.LogWarning("Uncorrect path");
-					path.Clear();
+					correct = false;
+					ClearList(path);
 					return path;
 				}
 				try
@@ -119,20 +130,31 @@ public class PathFinding : MonoBehaviour {
 					{
 						ChangeNextToNeighbour(currentNode);
 
+						// TODO: Fix when you walk to node 4 and then back to 3
+						Debug.Log("Here1 currentNode: " + currentNode);
 						if (currentNode.neighbours.Length > startNode.neighbours.Length) startNode = currentNode;
 
+						Debug.Log("Here2 currentNode: " + currentNode);
 						if (nextNode.walkable)
 						{
+							Debug.Log("Here21 currentNode: " + currentNode);
+							Debug.Log("Here21 nextnode: " + nextNode);
 							currentNode = nextNode;
 							AddNodeToPath(currentNode);
-							
-							if (currentNode == targetNode) break;
+
+							if (currentNode == targetNode)
+							{
+								Debug.Log("Here22");
+								correct = true;
+								break;
+							}
 						}
 						else
 						{
 							direction = 2;
 							ChangeNextToNeighbour(currentNode);
 
+							Debug.Log("Here3");
 							if (nextNode.walkable)
 							{
 								currentNode = nextNode;
@@ -140,6 +162,7 @@ public class PathFinding : MonoBehaviour {
 
 								if (currentNode == targetNode)
 								{
+									correct = true;
 									break;
 								}
 								else
@@ -147,19 +170,25 @@ public class PathFinding : MonoBehaviour {
 									direction = 1;
 									ChangeNextToNeighbour(currentNode);
 
+									Debug.Log("Here4");
 									if (nextNode.walkable)
 									{
 										currentNode = nextNode;
 										AddNodeToPath(currentNode);
 
-										if (currentNode == targetNode) break;
+										if (currentNode == targetNode)
+										{
+											correct = true;
+											break;
+										}
 									}
 								}
 							}
 							else
 							{
 								Debug.LogWarning("Uncorrect path");
-								path.Clear();
+								correct = false;
+								ClearList(path);
 								return path;
 							}
 						}
@@ -168,7 +197,8 @@ public class PathFinding : MonoBehaviour {
 				catch
 				{
 					Debug.LogWarning("Uncorrect path");
-					path.Clear();
+					correct = false;
+					ClearList(path);
 					return path;
 				}
 			}
@@ -192,6 +222,11 @@ public class PathFinding : MonoBehaviour {
 	private void ChangeNextToNeighbour(Node node)
 	{
 		nextNode = node.GetComponent<Node>().neighbours[direction].GetComponent<Node>();
+	}
+
+	public void ClearList(List<Node> list)
+	{
+		list.Clear();
 	}
 
 	void PrintList(List<Node> list)

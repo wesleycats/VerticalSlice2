@@ -35,9 +35,10 @@ public class PlayerController : MonoBehaviour
 			if (hit.transform.tag == "WalkNode")
 			{
 				Debug.LogWarning("Clicked node: " + hit.transform.name);
-				pfScript.path.Clear();
+				pfScript.ClearList(pfScript.path);
+				pmScript.pathIndex = 0;
 				pmScript.path = pfScript.FindPath(hit.transform.gameObject.GetComponent<Node>());
-				pmScript.move = true;
+				if (pfScript.correct) { pmScript.move = true; }
 			}
 		}
 	}

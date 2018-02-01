@@ -2409,6 +2409,7 @@ MonoBehaviour:
   moveSpeed: 0.5
   path: []
   move: 0
+  pathIndex: 0
 --- !u!114 &189973527
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2434,6 +2435,11 @@ MonoBehaviour:
   path: []
   clickedNode: {fileID: 0}
   clear: 0
+  correct: 0
+  startNode: {fileID: 0}
+  currentNode: {fileID: 0}
+  nextNode: {fileID: 0}
+  targetNode: {fileID: 0}
 --- !u!1 &193794171 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1358482456828262, guid: 2a905a728129a9a45836b176a7b5b5f9,
