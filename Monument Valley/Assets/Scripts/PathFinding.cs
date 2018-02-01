@@ -12,6 +12,8 @@ public class PathFinding : MonoBehaviour
 	public Node[] lowerTeleportNodes;
 	public bool clear;
 	public bool correct;
+	public bool stay;
+	public int floorLevel, nodeIndex;
 
 	public Node startNode, currentNode, nextNode, targetNode;
 	int direction;
@@ -19,30 +21,81 @@ public class PathFinding : MonoBehaviour
 	private void Awake()
 	{
 		path = new List<Node>();
-		allNodes = new List<GameObject>();
-		upperTeleportNodes = new Node[3];
-		lowerTeleportNodes = new Node[3];
-
-		allNodes = GameObject.FindGameObjectsWithTag("WalkNode").ToList();
+		//upperTeleportNodes = new Node[3];
+		//lowerTeleportNodes = new Node[3];
+		//allNodes = new List<GameObject>();
+		//allNodes = GameObject.FindGameObjectsWithTag("WalkNode").ToList();
 	}
 
 	private void Start()
 	{
+		/*
+		//allNodes.Sort();
 		for (int i = 0; i < allNodes.Count; i++)
 		{
-			Debug.Log(allNodes[i].name);
-		}
+			allNodes[i] = allNodes[i].name;
+		}*/
 	}
 
 	public List<Node> FindPath(Node node)
 	{
 		if (node.walkable)
 		{
+			if (node == upperTeleportNodes[2])
+			{
+				stay = true;
+				switch (floorLevel)
+				{
+					case 4:
+						node = upperTeleportNodes[2];
+						Debug.Log("node = " + node.name);
+						break;
+
+					case 3:
+						node = lowerTeleportNodes[2];
+						Debug.Log("node = " + node.name);
+						break;
+				}
+			}
+			else if (node == upperTeleportNodes[1])
+			{
+				stay = true;
+				switch (floorLevel)
+				{
+					case 3:
+						node = upperTeleportNodes[1];
+						Debug.Log("node = " + node.name);
+						break;
+
+					case 2:
+						node = lowerTeleportNodes[1];
+						Debug.Log("node = " + node.name);
+						break;
+				}
+			}
+			else if (node == upperTeleportNodes[0])
+			{
+				stay = true;
+				switch (floorLevel)
+				{
+					case 2:
+						node = upperTeleportNodes[0];
+						Debug.Log("node = " + node.name);
+						break;
+
+					case 1:
+						node = lowerTeleportNodes[0];
+						Debug.Log("node = " + node.name);
+						break;
+				}
+			}
+
 			direction = 0;
 			clickedNode = node;
 			startNode = clickedNode;
 			currentNode = startNode;
 			AddNodeToPath(currentNode);
+			Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 			try
 			{
@@ -58,6 +111,7 @@ public class PathFinding : MonoBehaviour
 						//Debug.Log("current: " + currentNode + " next: " + nextNode);
 						currentNode = nextNode;
 						AddNodeToPath(currentNode);
+						Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 						if (currentNode == targetNode)
 						{
@@ -128,6 +182,7 @@ public class PathFinding : MonoBehaviour
 							startNode = currentNode;
 							ClearList(path);
 							AddNodeToPath(currentNode);
+							Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 						}
 
 						clear = false;
@@ -164,13 +219,13 @@ public class PathFinding : MonoBehaviour
 					{
 						ChangeNextToNeighbour(currentNode);
 
-						//Debug.Log("Here1 currentNode: " + currentNode);
+						Debug.Log("Here1 currentNode: " + currentNode);
 						if (currentNode.neighbours.Length > startNode.neighbours.Length) startNode = currentNode;
 
-						//Debug.Log("Here2 currentNode: " + currentNode);
+						Debug.Log("Here2 currentNode: " + currentNode);
 						if (nextNode.walkable)
 						{
-							//Debug.Log("currentNode: " + currentNode + " next: " + nextNode + " target: " + targetNode);
+							Debug.Log("currentNode: " + currentNode + " next: " + nextNode + " target: " + targetNode);
 							if (currentNode == targetNode)
 							{
 								correct = true;
@@ -181,11 +236,13 @@ public class PathFinding : MonoBehaviour
 								currentNode = nextNode;
 								AddNodeToPath(currentNode);
 								Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
+
 								if (currentNode == clickedNode)
 								{
 									startNode = currentNode;
 									ClearList(path);
 									AddNodeToPath(currentNode);
+									Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 								}
 							}
 
@@ -200,7 +257,7 @@ public class PathFinding : MonoBehaviour
 							direction = 2;
 							ChangeNextToNeighbour(currentNode);
 
-							Debug.Log("Here3");
+							//Debug.Log("Here3");
 							if (nextNode.walkable)
 							{
 								currentNode = nextNode;
@@ -217,7 +274,7 @@ public class PathFinding : MonoBehaviour
 									direction = 1;
 									ChangeNextToNeighbour(currentNode);
 
-									Debug.Log("Here4");
+									//Debug.Log("Here4");
 									if (nextNode.walkable)
 									{
 										currentNode = nextNode;
@@ -273,8 +330,66 @@ public class PathFinding : MonoBehaviour
 		nextNode = node.GetComponent<Node>().neighbours[direction].GetComponent<Node>();
 	}
 
-	private void Teleport(Node firstNode, Node secondNode)
+	public int CheckFloor()
 	{
+		for (int i = 0; i < allNodes.Count; i++)
+		{
+			//Debug.Log(allNodes[i].name + " on index " + allNodes.IndexOf(allNodes[i]));
+			if (targetNode.gameObject == allNodes[i])
+			{
+				nodeIndex = i;
+			}
+		}
+
+		//Debug.Log(nodeIndex);
+
+		if (nodeIndex >= 45)
+		{
+			floorLevel = 4;
+		}
+		else if (nodeIndex >= 32)
+		{
+			floorLevel = 3;
+		}
+		else if (nodeIndex >= 18)
+		{
+			floorLevel = 2;
+		}
+		else
+		{
+			floorLevel = 1;
+		}
+
+		//Debug.Log(floorLevel);
+		return floorLevel;
+	}
+
+	private Node OneLessIndexNode()
+	{
+		Node node;
+		node = null;
+		for (int i = 0; i < allNodes.Count; i++)
+		{
+			//Debug.Log(allNodes[i].name + " on index " + allNodes.IndexOf(allNodes[i]));
+			if (targetNode.gameObject == allNodes[i])
+			{
+				try
+				{
+					node = allNodes[i - 1].GetComponent<Node>();
+				}
+				catch
+				{
+
+				}
+			}
+		}
+
+		return node;
+	}
+
+	public void Teleport(Node firstNode, Node secondNode)
+	{
+		// TODO: Fix teleport, if player is above couple of nodes and hits a upperTeleportNode
 		//allNodes 
 	}
 
@@ -291,9 +406,22 @@ public class PathFinding : MonoBehaviour
 		}
 	}
 
+
+
 	private void OnTriggerEnter(Collider other)
 	{
 		targetNode = other.GetComponent<Node>();
-		Debug.Log("Target node changed to: " + targetNode.name);
+		//Debug.Log("Target node changed to: " + targetNode.name);
+		if (!stay)
+		{
+			for (int i = 0; i < upperTeleportNodes.Length; i++)
+			{
+				if (targetNode == upperTeleportNodes[i])
+				{
+					Teleport(targetNode, OneLessIndexNode());
+				}
+			}
+		}
+		CheckFloor();
 	}
 }

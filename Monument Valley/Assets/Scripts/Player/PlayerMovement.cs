@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour {
 		{
 			Node currentNode = path[pathIndex];
 			Node clickedNode = GetComponent<PathFinding>().clickedNode;
+
 			try
 			{
 				Node nextNode = path[pathIndex + 1];
