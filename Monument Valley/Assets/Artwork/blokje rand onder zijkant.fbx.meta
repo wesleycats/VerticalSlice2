@@ -1,0 +1,232 @@
+fileFormatVersion: 2
+guid: 66dc8882d35f9734383ba0820a8cd511
+timeCreated: 1516798188
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: af
+    100002: //RootNode
+    100004: Boole
+    100006: Boole_2
+    100008: Boole_2_2
+    100010: Boole_3
+    100012: Boole_4
+    100014: brug
+    100016: brug_1
+    100018: ch
+    100020: Cone
+    100022: Cube
+    100024: Cube_1
+    100026: Cube_1_2
+    100028: Cube_1_3
+    100030: Cube_2
+    100032: Cube_3
+    100034: Cube_4
+    100036: Cube_5
+    100038: Cube_6
+    100040: Cube_7
+    100042: Cylinder
+    100044: Cylinder_1
+    100046: Cylinder_2
+    100048: Cylinder_3
+    100050: hoek
+    100052: rand
+    100054: sand
+    100056: Sphere
+    100058: tunnel
+    100060: tunnel_1
+    100062: zij_rand
+    100064: zij_rand_af
+    400000: af
+    400002: //RootNode
+    400004: Boole
+    400006: Boole_2
+    400008: Boole_2_2
+    400010: Boole_3
+    400012: Boole_4
+    400014: brug
+    400016: brug_1
+    400018: ch
+    400020: Cone
+    400022: Cube
+    400024: Cube_1
+    400026: Cube_1_2
+    400028: Cube_1_3
+    400030: Cube_2
+    400032: Cube_3
+    400034: Cube_4
+    400036: Cube_5
+    400038: Cube_6
+    400040: Cube_7
+    400042: Cylinder
+    400044: Cylinder_1
+    400046: Cylinder_2
+    400048: Cylinder_3
+    400050: hoek
+    400052: rand
+    400054: sand
+    400056: Sphere
+    400058: tunnel
+    400060: tunnel_1
+    400062: zij_rand
+    400064: zij_rand_af
+    2300000: brug_1
+    2300002: Cone
+    2300004: Cube
+    2300006: Cube_1
+    2300008: Cube_1_2
+    2300010: Cube_1_3
+    2300012: Cube_2
+    2300014: Cube_3
+    2300016: Cube_4
+    2300018: Cube_5
+    2300020: Cube_6
+    2300022: Cube_7
+    2300024: Cylinder
+    2300026: Cylinder_1
+    2300028: Cylinder_2
+    2300030: Cylinder_3
+    2300032: hoek
+    2300034: rand
+    2300036: sand
+    2300038: Sphere
+    2300040: zij_rand
+    2300042: zij_rand_af
+    3300000: brug_1
+    3300002: Cone
+    3300004: Cube
+    3300006: Cube_1
+    3300008: Cube_1_2
+    3300010: Cube_1_3
+    3300012: Cube_2
+    3300014: Cube_3
+    3300016: Cube_4
+    3300018: Cube_5
+    3300020: Cube_6
+    3300022: Cube_7
+    3300024: Cylinder
+    3300026: Cylinder_1
+    3300028: Cylinder_2
+    3300030: Cylinder_3
+    3300032: hoek
+    3300034: rand
+    3300036: sand
+    3300038: Sphere
+    3300040: zij_rand
+    3300042: zij_rand_af
+    4300000: Cube
+    4300002: Cube_1
+    4300004: brug_1
+    4300006: zij_rand_af
+    4300008: zij_rand
+    4300010: Cube_1_2
+    4300012: hoek
+    4300014: rand
+    4300016: Cube_1_3
+    4300018: sand
+    4300020: Cube_2
+    4300022: Cube_3
+    4300024: Cube_4
+    4300026: Cylinder_1
+    4300028: Cylinder
+    4300030: Cube_5
+    4300032: Cylinder_2
+    4300034: Cube_6
+    4300036: Cylinder_3
+    4300038: Cube_7
+    4300040: Sphere
+    4300042: Cone
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat
+    second: {fileID: 2100000, guid: c86729814e93e4c40a2cb3b39e1a3c4b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat.1
+    second: {fileID: 2100000, guid: af11d640c5576bd49b66106b4baf4a90, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: ac5c4c640c873b349a524fdbea95452e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
