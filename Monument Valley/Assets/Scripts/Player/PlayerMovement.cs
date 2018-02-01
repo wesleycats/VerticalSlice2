@@ -44,20 +44,20 @@ public class PlayerMovement : MonoBehaviour {
 					{
 						transform.position = currentNode.transform.position;
 						currentNode = path[pathIndex++];
-						Debug.Log(GetComponent<PathFinding>().targetNode);
+						//Debug.Log(GetComponent<PathFinding>().targetNode);
 					}
 				}
 			}
 			catch
 			{
-				Debug.Log("Current node: " + currentNode);
-				Debug.Log("Last Node");
+				//Debug.Log("Current node: " + currentNode);
+				//Debug.Log("Last Node");
 				if (Vector3.Distance(transform.position, currentNode.transform.position) <= 0.01f)
 				{
 					transform.position = currentNode.transform.position;
 					move = false;
 					GetComponent<PathFinding>().correct = false;
-					Debug.Log(GetComponent<PathFinding>().correct);
+					GetComponent<PathFinding>().clear = false;
 					GetComponent<PathFinding>().ClearList(path);
 				}
 			}
