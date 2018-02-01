@@ -1,8 +1,8 @@
-/Monument\ Valley/[Ll]ibrary/
-/Monument\ Valley/[Tt]emp/
-/Monument\ Valley/[Oo]bj/
-/Monument\ Valley/[Bb]uild/
-/Monument\ Valley/[Bb]uilds/
+/Monument\ Valley/[Ll]ibrary/*
+/Monument\ Valley/[Tt]emp/*
+/Monument\ Valley/[Oo]bj/*
+/Monument\ Valley/[Bb]uild/*
+/Monument\ Valley/[Bb]uilds/*
 /Monument\ Valley/Assets/AssetStoreTools*
 
 # Visual Studio 2015 cache directory
@@ -32,3 +32,13 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+Monument Valley/.vs/Monument Valley/v15/Server/sqlite3/storage.ide
+Monument Valley/Library/assetDatabase3
+Monument Valley/Library/expandedItems
+Monument Valley/Library/CurrentLayout.dwlt
+Monument Valley/Library/InspectorExpandedItems.asset
+Monument Valley/Library/LastSceneManagerSetup.txt
+Monument Valley/Library/metadata/00/00000000000000003000000000000000
+Monument Valley/Library/metadata/00/00000000000000005100000000000000
+Monument Valley/Library/metadata/00/00000000000000008000000000000000
+Monument Valley/.vs/Monument Valley/v15/Server/sqlite3/storage.ide
