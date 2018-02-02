@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour {
 			{
 				//Debug.Log("Current node: " + currentNode);
 				//Debug.Log("Last Node");
-				if (Vector3.Distance(transform.position, currentNode.transform.position) <= 0.01f)
+				if (Vector3.Distance(transform.position, currentNode.transform.position) <= 0.03f)
 				{
 					transform.position = currentNode.transform.position;
 					move = false;

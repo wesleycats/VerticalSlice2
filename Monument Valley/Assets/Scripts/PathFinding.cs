@@ -12,10 +12,12 @@ public class PathFinding : MonoBehaviour
 	public Node[] lowerTeleportNodes;
 	public bool clear;
 	public bool correct;
-	public bool stay;
 	public int floorLevel, nodeIndex;
+	public float seconds;
 
 	public Node startNode, currentNode, nextNode, targetNode;
+	
+	bool stay, teleport;
 	int direction;
 
 	private void Awake()
@@ -39,6 +41,7 @@ public class PathFinding : MonoBehaviour
 
 	public List<Node> FindPath(Node node)
 	{
+		teleport = true;
 		if (node.walkable)
 		{
 			if (node == upperTeleportNodes[2])
@@ -373,24 +376,51 @@ public class PathFinding : MonoBehaviour
 			//Debug.Log(allNodes[i].name + " on index " + allNodes.IndexOf(allNodes[i]));
 			if (targetNode.gameObject == allNodes[i])
 			{
-				try
-				{
-					node = allNodes[i - 1].GetComponent<Node>();
-				}
-				catch
-				{
+				try	{ node = allNodes[i - 1].GetComponent<Node>(); }
+				catch {	}
+			}
+		}
+		
+		return node;
+	}
 
-				}
+	private Node OneMoreIndexNode()
+	{
+		Node node;
+		node = null;
+		for (int i = 0; i < allNodes.Count; i++)
+		{
+			//Debug.Log(allNodes[i].name + " on index " + allNodes.IndexOf(allNodes[i]));
+			if (targetNode.gameObject == allNodes[i])
+			{
+				try { node = allNodes[i + 1].GetComponent<Node>(); }
+				catch { }
 			}
 		}
 
 		return node;
 	}
 
-	public void Teleport(Node firstNode, Node secondNode)
+	public void Teleport(Node node)
 	{
-		// TODO: Fix teleport, if player is above couple of nodes and hits a upperTeleportNode
-		//allNodes 
+		if (teleport)
+		{
+			transform.position = node.transform.position;
+			GetComponent<PlayerMovement>().pathIndex++;
+			teleport = false;
+		}
+		Debug.Log(nextNode.name);
+		/*if (transform.position == targetNode.transform.position)
+		{
+			transform.position = node.transform.position;
+			GetComponent<PlayerMovement>().pathIndex++;
+		}*/
+	}
+
+	private IEnumerator TeleportDelay(Node node)
+	{
+		yield return new WaitForSeconds(seconds);
+		Teleport(node);
 	}
 
 	public void ClearList(List<Node> list)
@@ -411,17 +441,25 @@ public class PathFinding : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		targetNode = other.GetComponent<Node>();
-		//Debug.Log("Target node changed to: " + targetNode.name);
+		Debug.Log("Target node changed to: " + targetNode.name);
 		if (!stay)
 		{
 			for (int i = 0; i < upperTeleportNodes.Length; i++)
 			{
-				if (targetNode == upperTeleportNodes[i])
+				if (targetNode.transform.position == upperTeleportNodes[i].transform.position)
 				{
-					Teleport(targetNode, OneLessIndexNode());
+					StartCoroutine(TeleportDelay(OneLessIndexNode()));
+				}
+			}
+
+			for (int i = 0; i < lowerTeleportNodes.Length; i++)
+			{
+				if (targetNode.transform.position == lowerTeleportNodes[i].transform.position)
+				{
+					StartCoroutine(TeleportDelay(OneMoreIndexNode()));
 				}
 			}
 		}
-		CheckFloor();
+		CheckFloor(); 
 	}
 }
