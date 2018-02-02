@@ -396,6 +396,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 42079074}
+  - component: {fileID: 42079075}
   m_Layer: 0
   m_Name: Boat
   m_TagString: Untagged
@@ -418,6 +419,19 @@ Transform:
   m_Father: {fileID: 1950875499}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &42079075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 42079073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3698a58c014e04f992e26a2dbac94f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 371161683}
+  moveSpeed: 0.3
 --- !u!1 &46822506
 GameObject:
   m_ObjectHideFlags: 0
@@ -3456,6 +3470,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4079898688079178, guid: b453ec487af0c184cac3aca9589f3f46,
     type: 2}
   m_PrefabInternal: {fileID: 761000508}
+--- !u!1 &371161683 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1209378898790134, guid: f4ddfcca2542d3d4f9561d761d029e67,
+    type: 2}
+  m_PrefabInternal: {fileID: 2106383803}
 --- !u!1 &372850582
 GameObject:
   m_ObjectHideFlags: 0
@@ -19155,6 +19174,11 @@ Prefab:
       propertyPath: lowerTeleportNodes.Array.data[2]
       value: 
       objectReference: {fileID: 1112188120}
+    - target: {fileID: 114051808320431324, guid: f4ddfcca2542d3d4f9561d761d029e67,
+        type: 2}
+      propertyPath: boat
+      value: 
+      objectReference: {fileID: 42079073}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f4ddfcca2542d3d4f9561d761d029e67, type: 2}
   m_IsPrefabParent: 0

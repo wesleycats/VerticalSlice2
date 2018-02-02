@@ -10,33 +10,20 @@ public class PathFinding : MonoBehaviour
 	public Node clickedNode;
 	public Node[] upperTeleportNodes;
 	public Node[] lowerTeleportNodes;
+	public GameObject boat;
 	public bool clear;
 	public bool correct;
 	public int floorLevel, nodeIndex;
 	public float seconds;
 
 	public Node startNode, currentNode, nextNode, targetNode;
-	
+
 	bool stay, teleport;
 	int direction;
 
 	private void Awake()
 	{
 		path = new List<Node>();
-		//upperTeleportNodes = new Node[3];
-		//lowerTeleportNodes = new Node[3];
-		//allNodes = new List<GameObject>();
-		//allNodes = GameObject.FindGameObjectsWithTag("WalkNode").ToList();
-	}
-
-	private void Start()
-	{
-		/*
-		//allNodes.Sort();
-		for (int i = 0; i < allNodes.Count; i++)
-		{
-			allNodes[i] = allNodes[i].name;
-		}*/
 	}
 
 	public List<Node> FindPath(Node node)
@@ -51,12 +38,10 @@ public class PathFinding : MonoBehaviour
 				{
 					case 4:
 						node = upperTeleportNodes[2];
-						Debug.Log("node = " + node.name);
 						break;
 
 					case 3:
 						node = lowerTeleportNodes[2];
-						Debug.Log("node = " + node.name);
 						break;
 				}
 			}
@@ -67,12 +52,10 @@ public class PathFinding : MonoBehaviour
 				{
 					case 3:
 						node = upperTeleportNodes[1];
-						Debug.Log("node = " + node.name);
 						break;
 
 					case 2:
 						node = lowerTeleportNodes[1];
-						Debug.Log("node = " + node.name);
 						break;
 				}
 			}
@@ -83,12 +66,10 @@ public class PathFinding : MonoBehaviour
 				{
 					case 2:
 						node = upperTeleportNodes[0];
-						Debug.Log("node = " + node.name);
 						break;
 
 					case 1:
 						node = lowerTeleportNodes[0];
-						Debug.Log("node = " + node.name);
 						break;
 				}
 			}
@@ -98,23 +79,19 @@ public class PathFinding : MonoBehaviour
 			startNode = clickedNode;
 			currentNode = startNode;
 			AddNodeToPath(currentNode);
-			Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 			try
 			{
 				do
 				{
 					ChangeNextToNeighbour(currentNode);
-
-					//Debug.Log("here");
+					
 					if (currentNode.neighbours.Length > startNode.neighbours.Length) startNode = currentNode;
 
 					if (nextNode.walkable)
 					{
-						//Debug.Log("current: " + currentNode + " next: " + nextNode);
 						currentNode = nextNode;
 						AddNodeToPath(currentNode);
-						Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 						if (currentNode == targetNode)
 						{
@@ -127,13 +104,11 @@ public class PathFinding : MonoBehaviour
 					{
 						direction = 2;
 						ChangeNextToNeighbour(currentNode);
-
-						Debug.Log("here");
+						
 						if (nextNode.walkable)
 						{
 							currentNode = nextNode;
 							AddNodeToPath(currentNode);
-							Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 							if (currentNode == targetNode)
 							{
@@ -142,14 +117,12 @@ public class PathFinding : MonoBehaviour
 							}
 							else
 							{
-								Debug.Log("here");
 								clear = false;
 								if (currentNode.neighbours[direction]) ; // To break out this loop and continue in the catch loop
 							}
 						}
 						else
 						{
-							Debug.LogWarning("Uncorrect path");
 							correct = false;
 							ClearList(path);
 							return path;
@@ -162,15 +135,11 @@ public class PathFinding : MonoBehaviour
 				direction = 1;
 				if (clear)
 				{
-					//Debug.Log("current: " + currentNode + " clicked: " + clickedNode);
 					ClearList(path);
 					currentNode = clickedNode;
 					AddNodeToPath(currentNode);
-					//Debug.Log("start: " + startNode);
-					//Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 					currentNode = startNode;
 					AddNodeToPath(currentNode);
-					Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 					ChangeNextToNeighbour(currentNode);
 
@@ -178,14 +147,12 @@ public class PathFinding : MonoBehaviour
 					{
 						currentNode = nextNode;
 						AddNodeToPath(currentNode);
-						Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 						if (currentNode == clickedNode)
 						{
 							startNode = currentNode;
 							ClearList(path);
 							AddNodeToPath(currentNode);
-							Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 						}
 
 						clear = false;
@@ -195,7 +162,6 @@ public class PathFinding : MonoBehaviour
 						}
 						catch
 						{
-							Debug.LogWarning("Uncorrect path");
 							correct = false;
 							ClearList(path);
 							return path;
@@ -203,7 +169,6 @@ public class PathFinding : MonoBehaviour
 					}
 					else
 					{
-						Debug.LogWarning("Uncorrect path");
 						correct = false;
 						ClearList(path);
 						return path;
@@ -211,7 +176,6 @@ public class PathFinding : MonoBehaviour
 				}
 				else
 				{
-					Debug.LogWarning("Uncorrect path");
 					correct = false;
 					ClearList(path);
 					return path;
@@ -221,14 +185,11 @@ public class PathFinding : MonoBehaviour
 					do
 					{
 						ChangeNextToNeighbour(currentNode);
-
-						Debug.Log("Here1 currentNode: " + currentNode);
+						
 						if (currentNode.neighbours.Length > startNode.neighbours.Length) startNode = currentNode;
-
-						Debug.Log("Here2 currentNode: " + currentNode);
+						
 						if (nextNode.walkable)
 						{
-							Debug.Log("currentNode: " + currentNode + " next: " + nextNode + " target: " + targetNode);
 							if (currentNode == targetNode)
 							{
 								correct = true;
@@ -238,14 +199,12 @@ public class PathFinding : MonoBehaviour
 							{
 								currentNode = nextNode;
 								AddNodeToPath(currentNode);
-								Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 								if (currentNode == clickedNode)
 								{
 									startNode = currentNode;
 									ClearList(path);
 									AddNodeToPath(currentNode);
-									Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 								}
 							}
 
@@ -259,13 +218,11 @@ public class PathFinding : MonoBehaviour
 						{
 							direction = 2;
 							ChangeNextToNeighbour(currentNode);
-
-							//Debug.Log("Here3");
+							
 							if (nextNode.walkable)
 							{
 								currentNode = nextNode;
 								AddNodeToPath(currentNode);
-								Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 								if (currentNode == targetNode)
 								{
@@ -276,13 +233,11 @@ public class PathFinding : MonoBehaviour
 								{
 									direction = 1;
 									ChangeNextToNeighbour(currentNode);
-
-									//Debug.Log("Here4");
+									
 									if (nextNode.walkable)
 									{
 										currentNode = nextNode;
 										AddNodeToPath(currentNode);
-										Debug.Log("added " + currentNode + " to index " + path.IndexOf(currentNode));
 
 										if (currentNode == targetNode)
 										{
@@ -294,7 +249,6 @@ public class PathFinding : MonoBehaviour
 							}
 							else
 							{
-								Debug.LogWarning("Uncorrect path");
 								correct = false;
 								ClearList(path);
 								return path;
@@ -304,7 +258,6 @@ public class PathFinding : MonoBehaviour
 				}
 				catch
 				{
-					Debug.LogWarning("Uncorrect path");
 					correct = false;
 					ClearList(path);
 					return path;
@@ -320,7 +273,6 @@ public class PathFinding : MonoBehaviour
 	private void AddNodeToPath(Node node)
 	{
 		path.Add(node);
-		//Debug.Log("added " + node + " to index " + path.IndexOf(node));
 	}
 
 	private void ChangeCurrentTo(Node node)
@@ -337,14 +289,11 @@ public class PathFinding : MonoBehaviour
 	{
 		for (int i = 0; i < allNodes.Count; i++)
 		{
-			//Debug.Log(allNodes[i].name + " on index " + allNodes.IndexOf(allNodes[i]));
 			if (targetNode.gameObject == allNodes[i])
 			{
 				nodeIndex = i;
 			}
 		}
-
-		//Debug.Log(nodeIndex);
 
 		if (nodeIndex >= 45)
 		{
@@ -362,8 +311,7 @@ public class PathFinding : MonoBehaviour
 		{
 			floorLevel = 1;
 		}
-
-		//Debug.Log(floorLevel);
+		
 		return floorLevel;
 	}
 
@@ -373,7 +321,6 @@ public class PathFinding : MonoBehaviour
 		node = null;
 		for (int i = 0; i < allNodes.Count; i++)
 		{
-			//Debug.Log(allNodes[i].name + " on index " + allNodes.IndexOf(allNodes[i]));
 			if (targetNode.gameObject == allNodes[i])
 			{
 				try	{ node = allNodes[i - 1].GetComponent<Node>(); }
@@ -390,7 +337,6 @@ public class PathFinding : MonoBehaviour
 		node = null;
 		for (int i = 0; i < allNodes.Count; i++)
 		{
-			//Debug.Log(allNodes[i].name + " on index " + allNodes.IndexOf(allNodes[i]));
 			if (targetNode.gameObject == allNodes[i])
 			{
 				try { node = allNodes[i + 1].GetComponent<Node>(); }
@@ -409,12 +355,6 @@ public class PathFinding : MonoBehaviour
 			GetComponent<PlayerMovement>().pathIndex++;
 			teleport = false;
 		}
-		Debug.Log(nextNode.name);
-		/*if (transform.position == targetNode.transform.position)
-		{
-			transform.position = node.transform.position;
-			GetComponent<PlayerMovement>().pathIndex++;
-		}*/
 	}
 
 	private IEnumerator TeleportDelay(Node node)
@@ -432,7 +372,7 @@ public class PathFinding : MonoBehaviour
 	{
 		for (int i = 0; i < list.Count; i++)
 		{
-			Debug.Log(list[i].name);
+			print(list[i].name);
 		}
 	}
 
@@ -441,7 +381,6 @@ public class PathFinding : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		targetNode = other.GetComponent<Node>();
-		Debug.Log("Target node changed to: " + targetNode.name);
 		if (!stay)
 		{
 			for (int i = 0; i < upperTeleportNodes.Length; i++)
@@ -459,6 +398,19 @@ public class PathFinding : MonoBehaviour
 					StartCoroutine(TeleportDelay(OneMoreIndexNode()));
 				}
 			}
+		}
+
+		/*for (int i = 0; i < allNodes.Count; i++)
+		{
+			if (targetNode.transform.position == allNodes[allNodes.Count - 1].transform.position)
+			{
+				transform.parent = boat.transform;
+			}
+		}*/
+		if (targetNode.transform.position == allNodes[allNodes.Count-1].transform.position)
+		{
+			transform.parent = boat.transform;
+			boat.GetComponent<BoatMovement>().Move();
 		}
 		CheckFloor(); 
 	}

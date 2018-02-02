@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
 
 	[SerializeField] float moveSpeed;
 
@@ -66,60 +67,5 @@ public class PlayerMovement : MonoBehaviour {
 			transform.LookAt(currentNode.transform.position);
 			transform.Translate(Vector3.forward * step);
 		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		/*if (transform.position == path[path.Count].transform.position)
-		{
-			move = false;
-		}
-
-		step = moveSpeed * Time.deltaTime;
-		path = GetComponent<PathFinding>().path;
-		try
-		{
-			if (move)
-			{
-				Node currentNode = path[pathIndex];
-				transform.LookAt(currentNode.transform.position);
-				transform.Translate(transform.forward * step);
-
-				if (Vector3.Distance(transform.position, currentNode.transform.position) <= 0.05)
-				{
-					transform.position = currentNode.transform.position;
-					currentNode = path[pathIndex++];
-					// is dit de einde node?
-				}
-
-			}
-		}
-		catch
-		{
-			//move = false;
-		}*/
 	}
 }
