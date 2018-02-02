@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114743996413765532}
   - component: {fileID: 54512277288174696}
   m_Layer: 0
-  m_Name: Walk Node
+  m_Name: Walk node
   m_TagString: WalkNode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

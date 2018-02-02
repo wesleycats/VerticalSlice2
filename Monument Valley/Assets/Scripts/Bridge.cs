@@ -10,8 +10,9 @@ public class Bridge : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other); 
-        bridgeTrigger = true;
+        Debug.Log(other);
+            bridgeTrigger = true;
+        
     }
 
     void Update()

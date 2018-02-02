@@ -6,6 +6,7 @@ public class Node : MonoBehaviour {
 
 	public GameObject[] neighbours;
 	public bool walkable;
+    public bool forceWalk;
 
 	// Use this for initialization
 	void Start () {

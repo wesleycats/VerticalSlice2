@@ -17,18 +17,22 @@ public class WalkableCheck : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		if (Physics.Raycast(ray, out hit, 200))
-		{
-			if (hit.transform.tag == "Block")
-			{
-				GetComponent<Node>().walkable = true;
-			}
-			else
-			{
-				GetComponent<Node>().walkable = false;
-			}
-		}
+        if(GetComponent<Node>().forceWalk == false)
+        {
+            if (Physics.Raycast(ray, out hit, 200))
+            {
+                if (hit.transform.tag == "Block")
+                {
+                    GetComponent<Node>().walkable = true;
+                }
+                else
+                {
+                    GetComponent<Node>().walkable = false;
+                }
+            }
+
+            Debug.DrawRay(ray.origin, ray.direction.normalized * hit.distance, Color.red);
+        }
 		
-		Debug.DrawRay(ray.origin, ray.direction.normalized * hit.distance, Color.red);
 	}
 }
