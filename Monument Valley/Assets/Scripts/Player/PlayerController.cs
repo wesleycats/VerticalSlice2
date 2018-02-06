@@ -5,10 +5,14 @@ using System.Linq;
 
 public class PlayerController : MonoBehaviour
 {
+	public Node difWalkNode;
+	public Node rightWalkNode;
+
 	Ray ray;
 	RaycastHit hit;
 	PathFinding pfScript;
 	PlayerMovement pmScript;
+	Node clickedNode;
 
 	private void Start()
 	{
@@ -34,10 +38,19 @@ public class PlayerController : MonoBehaviour
 		{
 			if (hit.transform.tag == "WalkNode")
 			{
-				Debug.LogWarning("Clicked node: " + hit.transform.name);
+				clickedNode = hit.transform.gameObject.GetComponent<Node>();
 				pfScript.ClearList(pfScript.path);
 				pmScript.pathIndex = 0;
-				pmScript.path = pfScript.FindPath(hit.transform.gameObject.GetComponent<Node>());
+				if (clickedNode == difWalkNode)
+				{
+					clickedNode = rightWalkNode;
+					pmScript.path = pfScript.FindPath(clickedNode);
+				}
+				else
+				{
+					pmScript.path = pfScript.FindPath(hit.transform.gameObject.GetComponent<Node>());
+				}
+				//Debug.LogWarning("Clicked node: " + clickedNode);
 				if (pfScript.correct) { pmScript.move = true; }
 			}
 		}

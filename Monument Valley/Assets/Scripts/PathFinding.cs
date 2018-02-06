@@ -8,6 +8,7 @@ public class PathFinding : MonoBehaviour
 	public List<Node> path;
 	public List<GameObject> allNodes;
 	public Node clickedNode;
+	public Node difWalkNode;
 	public Node[] upperTeleportNodes;
 	public Node[] lowerTeleportNodes;
 	public GameObject boat;
@@ -380,31 +381,34 @@ public class PathFinding : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		targetNode = other.GetComponent<Node>();
-		if (!stay)
+		if (other.tag == "WalkNode")
 		{
-			for (int i = 0; i < upperTeleportNodes.Length; i++)
+			targetNode = other.GetComponent<Node>();
+			if (!stay)
 			{
-				if (targetNode.transform.position == upperTeleportNodes[i].transform.position)
+				for (int i = 0; i < upperTeleportNodes.Length; i++)
 				{
-					StartCoroutine(TeleportDelay(OneLessIndexNode()));
+					if (targetNode.transform.position == upperTeleportNodes[i].transform.position)
+					{
+						StartCoroutine(TeleportDelay(OneLessIndexNode()));
+					}
+				}
+
+				for (int i = 0; i < lowerTeleportNodes.Length; i++)
+				{
+					if (targetNode.transform.position == lowerTeleportNodes[i].transform.position)
+					{
+						StartCoroutine(TeleportDelay(OneMoreIndexNode()));
+					}
 				}
 			}
 
-			for (int i = 0; i < lowerTeleportNodes.Length; i++)
+			if (targetNode.transform.position == allNodes[allNodes.Count - 1].transform.position)
 			{
-				if (targetNode.transform.position == lowerTeleportNodes[i].transform.position)
-				{
-					StartCoroutine(TeleportDelay(OneMoreIndexNode()));
-				}
+				transform.parent = boat.transform;
+				boat.GetComponent<BoatMovement>().Move();
 			}
+			CheckFloor();
 		}
-
-		if (targetNode.transform.position == allNodes[allNodes.Count-1].transform.position)
-		{
-			transform.parent = boat.transform;
-			boat.GetComponent<BoatMovement>().Move();
-		}
-		CheckFloor(); 
 	}
 }

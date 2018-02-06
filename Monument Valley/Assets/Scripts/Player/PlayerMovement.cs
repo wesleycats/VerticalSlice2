@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour
 	void Update()
 	{
 		path = GetComponent<PathFinding>().path;
-		//Debug.Log("Index: " + pathIndex);
 		if (move)
 		{
 			Node currentNode = path[pathIndex];
@@ -46,14 +45,11 @@ public class PlayerMovement : MonoBehaviour
 					{
 						transform.position = currentNode.transform.position;
 						currentNode = path[pathIndex++];
-						//Debug.Log(GetComponent<PathFinding>().targetNode);
 					}
 				}
 			}
 			catch
 			{
-				//Debug.Log("Current node: " + currentNode);
-				//Debug.Log("Last Node");
 				if (Vector3.Distance(transform.position, currentNode.transform.position) <= 0.03f)
 				{
 					transform.position = currentNode.transform.position;
