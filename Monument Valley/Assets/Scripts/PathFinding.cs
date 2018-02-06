@@ -400,13 +400,6 @@ public class PathFinding : MonoBehaviour
 			}
 		}
 
-		/*for (int i = 0; i < allNodes.Count; i++)
-		{
-			if (targetNode.transform.position == allNodes[allNodes.Count - 1].transform.position)
-			{
-				transform.parent = boat.transform;
-			}
-		}*/
 		if (targetNode.transform.position == allNodes[allNodes.Count-1].transform.position)
 		{
 			transform.parent = boat.transform;
