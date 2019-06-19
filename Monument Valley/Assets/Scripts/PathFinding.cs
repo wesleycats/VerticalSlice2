@@ -267,7 +267,7 @@ public class PathFinding : MonoBehaviour
 		}
 
 		path.Reverse();
-		PrintList(path);
+		//PrintList(path);
 		return path;
 	}
 
